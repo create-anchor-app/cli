@@ -1,0 +1,5 @@
+node_modules
+bin/api.json
+.DS_Store
+src/
+bin/*.zip

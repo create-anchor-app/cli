@@ -1,0 +1,39 @@
+{
+  "name": "create-anchor-app",
+  "version": "0.0.1",
+  "description": "create anchor apps on the fly ",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "npm run build && npm i . -g --force",
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/create-anchor-app/cli.git"
+  },
+  "bin": {
+    "create-anchor-app": "./bin/index.js"
+  },
+  "author": "ayush <hey@ayush.sh> (https://ayush.sh)",
+  "bugs": {
+    "url": "https://github.com/create-anchor-app/cli/issues"
+  },
+  "homepage": "https://github.com/create-anchor-app/cli#readme",
+  "dependencies": {
+    "chalk": "4.1.2",
+    "inquirer": "^8.2.0",
+    "node-fetch": "^2.6.7",
+    "node-stream-zip": "^1.15.0",
+    "project-name-generator": "^2.1.9"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.0",
+    "@types/node-fetch": "2",
+    "@types/unzipper": "^0.10.5",
+    "typescript": "^4.4.3"
+  }
+}
