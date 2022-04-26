@@ -1,0 +1,6 @@
+{
+  "cli": {
+    "repo": "cli",
+    "install": "npm install"
+  }
+}
