@@ -6,7 +6,7 @@ Quicikly create an anchor program from templates and setup anchor dev environmen
 <br>
 
 ## Feature roadmap
-- [ ] Command to generate anchor contracts for nft mint,staking,lending, data storage, airdrop etc .
+- [ ] Command to generate anchor contracts
 - [ ] Security.txt generation
 - [ ] local ledger directory 
 - [ ] local wallet generation and directory 
