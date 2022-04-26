@@ -91,9 +91,6 @@ export async function handler(template: string, name: string) {
     });
 }
 async function download(repo: string, path: string, name: string) {
-  console.log(
-    `https://codeload.github.com/create-anchor-app/${repo}/zip/refs/heads/master`
-  );
   const res = (await fetch(
     `https://codeload.github.com/create-anchor-app/${repo}/zip/refs/heads/master`
   )) as any;
