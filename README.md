@@ -1,5 +1,6 @@
-# create-anchor-app
+# Create Anchor App
 <hr>
+<img alt="Logo" align="right" src="" width="20%" />
 <br>
 
 ## Feature roadmap
