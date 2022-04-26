@@ -1,10 +1,12 @@
 {
   "mint-nft": {
     "repo": "mint-nft",
-    "install": "npm ci --force --progress=false"
+    "install": "npm ci --force --progress=false",
+    "run": "anchor build"
   },
   "stake-spl": {
     "repo": "stake-spl",
-    "install": "npm ci --force --progress=false"
+    "install": "npm ci --force --progress=false",
+    "run": "anchor build"
   }
 }

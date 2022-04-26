@@ -50,7 +50,7 @@ export async function handler(template: string, name: string) {
         console.log(chalk.gray("Setting up..."));
         console.log(chalk.gray("Installing Dependencies..."));
         execSync(
-          `cd ${pathname} && ${ex.install} --force && git init && yarn install && anchor build`,
+          `cd ${pathname} && ${ex.install} --force && git init`,
           {
             stdio: [1],
           }
