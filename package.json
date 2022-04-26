@@ -1,6 +1,6 @@
 {
   "name": "@create-anchor-app/cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "create anchor apps on the fly ",
   "main": "dist/index.js",
   "license": "MIT",
