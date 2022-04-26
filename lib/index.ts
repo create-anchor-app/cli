@@ -12,9 +12,7 @@ const args = process.argv.slice(2);
 const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
 console.clear();
 let examples: any = {};
-fetch(
-  "https://gist.githubusercontent.com/anoushk1234/9854cf8e306524b7fe39b3835013d315/raw/338fe6b84fd9f4ab13d1e598a7ca27f008fb6be2/api.json"
-)
+fetch("https://create-anchor-app.vercel.app/api.json")
   .then(async (res) => {
     fs.writeFile(
       path.resolve(__dirname, "api.json"),
