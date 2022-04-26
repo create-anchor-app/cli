@@ -20,6 +20,12 @@ jobs:
       - name: Install vercel
         run: npm i vercel -g
 
+
+
+      - name: Build
+        run: npm install && npm run build
+
+
       - name: Deploy API
         run: vercel --prod --token $VERCEL_TOKEN
         env:
