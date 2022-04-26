@@ -107,7 +107,7 @@ function handler(template, name) {
                             console.clear();
                             console.log(chalk_1.default.gray("Setting up..."));
                             console.log(chalk_1.default.gray("Installing Dependencies..."));
-                            (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install, " --force && git init && yarn install && anchor build"), {
+                            (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install, " --force && git init"), {
                                 stdio: [1],
                             });
                             console.clear();
