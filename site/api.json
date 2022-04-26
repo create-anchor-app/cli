@@ -2,5 +2,9 @@
   "mint-nft": {
     "repo": "mint-nft",
     "install": "npm install"
+  },
+  "stake-spl": {
+    "repo": "stake-spl",
+    "install": "npm install"
   }
 }

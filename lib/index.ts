@@ -13,7 +13,7 @@ const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
 console.clear();
 let examples: any = {};
 fetch(
-  "https://gist.githubusercontent.com/anoushk1234/9854cf8e306524b7fe39b3835013d315/raw/9d9f2e39df620693696cb163f3240d12e0ede69a/api.json"
+  "https://gist.githubusercontent.com/anoushk1234/9854cf8e306524b7fe39b3835013d315/raw/338fe6b84fd9f4ab13d1e598a7ca27f008fb6be2/api.json"
 )
   .then(async (res) => {
     fs.writeFile(
