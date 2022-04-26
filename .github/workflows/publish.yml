@@ -17,10 +17,7 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install vercel
-        run: npm i vercel -g
-
       - name: Deploy API
-        run: vercel --prod --token $VERCEL_TOKEN
+        run: npx vercel --prod --token $VERCEL_TOKEN
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
