@@ -1,5 +1,5 @@
 {
-  "name": "create-anchor-app",
+  "name": "@create-anchor-app/cli",
   "version": "0.0.1",
   "description": "create anchor apps on the fly ",
   "main": "dist/index.js",
