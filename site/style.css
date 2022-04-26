@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap');
+
+@font-face {
+    font-family: "Bold";
+    src: url("Bold.otf") format("opentype");
+}
+
+/* @font-face {
+    font-family: "Regular";
+    src: url("Regular.ttf") format("truetype");
+} */
+
+@keyframes load {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    background-color: black;
+    color: white;
+    /* font-family: "Regular"; */
+    font-family: 'Noto Sans', sans-serif;
+    padding: 50px;
+    font-size: 1.5em;
+
+}
+
+
+
+h1 {
+    font-family: "Bold";
+    font-size: 50px;
+    margin-top: 50px;
+    animation-name: load;
+    animation-duration: 2s;
+}
+
+p,
+li {
+    animation-name: load;
+    animation-duration: 3s;
+}
+
+a:link {
+    color: red;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
