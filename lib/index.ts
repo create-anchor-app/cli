@@ -13,7 +13,7 @@ const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
 console.clear();
 let examples: any = {};
 fetch(
-  "https://create-anchor-app.vercel.app/api.json"
+  "https://gist.githubusercontent.com/anoushk1234/9854cf8e306524b7fe39b3835013d315/raw/9d9f2e39df620693696cb163f3240d12e0ede69a/api.json"
 )
   .then(async (res) => {
     fs.writeFile(
@@ -96,7 +96,7 @@ fetch(
               process.exit(1);
             }
             if (args.includes("-v") || args.includes("--version")) {
-              flags("-v")
+              flags("-v");
             }
         }
       }

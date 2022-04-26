@@ -49,9 +49,12 @@ export async function handler(template: string, name: string) {
         console.clear();
         console.log(chalk.gray("Setting up..."));
         console.log(chalk.gray("Installing Dependencies..."));
-        execSync(`cd ${pathname} && ${ex.install} && git init`, {
-          stdio: [1],
-        });
+        execSync(
+          `cd ${pathname} && ${ex.install} --force && git init && yarn install && anchor build`,
+          {
+            stdio: [1],
+          }
+        );
         console.clear();
         console.log(
           `Done in ${(new Date().getTime() - start.getTime()) / 1000}s ✨ `

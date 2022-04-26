@@ -51,7 +51,7 @@ var args = process.argv.slice(2);
 var supportedCommands = ["-v", "--version", "-h", "--help"];
 console.clear();
 var examples = {};
-(0, node_fetch_1.default)("https://create-anchor-app.vercel.app/api.json")
+(0, node_fetch_1.default)("https://gist.githubusercontent.com/anoushk1234/9854cf8e306524b7fe39b3835013d315/raw/9d9f2e39df620693696cb163f3240d12e0ede69a/api.json")
     .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     return __generator(this, function (_d) {

@@ -1,6 +1,6 @@
 {
-  "cli": {
-    "repo": "cli",
+  "mint-nft": {
+    "repo": "mint-nft",
     "install": "npm install"
   }
 }
