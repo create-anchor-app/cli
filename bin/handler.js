@@ -155,22 +155,29 @@ function download(repo, path, name) {
                 case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/create-anchor-app/".concat(repo, "/zip/refs/heads/master"))];
                 case 1:
                     res = (_a.sent());
+                    if (!(res.status !== 200)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/create-anchor-app/".concat(repo, "/zip/refs/heads/main"))];
+                case 2:
+                    res = (_a.sent());
+                    _a.label = 3;
+                case 3:
+                    console.log(chalk_1.default.gray(res.statusText));
                     fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/").concat(name, ".zip"));
                     return [4 /*yield*/, new Promise(function (resolve, reject) {
                             res.body.pipe(fileStream);
                             res.body.on("error", reject);
                             fileStream.on("finish", resolve);
                         })];
-                case 2:
+                case 4:
                     _a.sent();
                     fs_1.default.mkdirSync(path);
                     zip = new node_stream_zip_1.default.async({ file: "".concat(__dirname, "/").concat(name, ".zip") });
                     return [4 /*yield*/, zip.extract("".concat(repo, "-master"), path)];
-                case 3:
+                case 5:
                     _a.sent();
                     console.log(chalk_1.default.gray("Done"));
                     return [4 /*yield*/, zip.close()];
-                case 4:
+                case 6:
                     _a.sent();
                     fs_1.default.unlinkSync("".concat(__dirname, "/").concat(name, ".zip"));
                     return [2 /*return*/];

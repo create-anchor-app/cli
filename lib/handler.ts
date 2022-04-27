@@ -49,12 +49,9 @@ export async function handler(template: string, name: string) {
         console.clear();
         console.log(chalk.gray("Setting up..."));
         console.log(chalk.gray("Installing Dependencies..."));
-        execSync(
-          `cd ${pathname} && ${ex.install} --force && git init`,
-          {
-            stdio: [1],
-          }
-        );
+        execSync(`cd ${pathname} && ${ex.install} --force && git init`, {
+          stdio: [1],
+        });
         console.clear();
         console.log(
           `Done in ${(new Date().getTime() - start.getTime()) / 1000}s ✨ `
@@ -91,9 +88,15 @@ export async function handler(template: string, name: string) {
     });
 }
 async function download(repo: string, path: string, name: string) {
-  const res = (await fetch(
+  let res = (await fetch(
     `https://codeload.github.com/create-anchor-app/${repo}/zip/refs/heads/master`
   )) as any;
+  if (res.status !== 200) {
+    res = (await fetch(
+      `https://codeload.github.com/create-anchor-app/${repo}/zip/refs/heads/main`
+    )) as any;
+  }
+  console.log(chalk.gray(res.statusText));
   const fileStream = fs.createWriteStream(`${__dirname}/${name}.zip`);
   await new Promise((resolve, reject) => {
     res.body.pipe(fileStream);

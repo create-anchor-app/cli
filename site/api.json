@@ -1,14 +1,14 @@
 {
   "mint-nft": {
     "repo": "mint-nft",
-    "install": "npm install"
+    "install": "npm ci --force --progress=false"
   },
   "stake-spl": {
     "repo": "stake-spl",
-    "install": "npm install"
+    "install": "npm ci --force --progress=false"
   },
   "anchor-escrow": {
     "repo": "anchor-escrow",
-    "install": "npm install"
+    "install": "npm ci --force --progress=false"
   }
 }
