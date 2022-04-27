@@ -10,5 +10,9 @@
   "anchor-escrow": {
     "repo": "anchor-escrow",
     "install": "npm ci --force --progress=false"
+  },
+  "nft-staking": {
+    "repo": "nft-staking",
+    "install": "npm ci --force --progress=false"
   }
 }
