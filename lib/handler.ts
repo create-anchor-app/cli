@@ -88,6 +88,7 @@ export async function handler(template: string, name: string) {
     });
 }
 async function download(repo: string, path: string, name: string) {
+  let branch: string = "master";
   let res = (await fetch(
     `https://codeload.github.com/create-anchor-app/${repo}/zip/refs/heads/master`
   )) as any;
@@ -95,6 +96,7 @@ async function download(repo: string, path: string, name: string) {
     res = (await fetch(
       `https://codeload.github.com/create-anchor-app/${repo}/zip/refs/heads/main`
     )) as any;
+    branch = "main";
   }
   console.log(chalk.gray(res.statusText));
   const fileStream = fs.createWriteStream(`${__dirname}/${name}.zip`);
@@ -106,7 +108,7 @@ async function download(repo: string, path: string, name: string) {
 
   fs.mkdirSync(path);
   const zip = new zipper.async({ file: `${__dirname}/${name}.zip` });
-  await zip.extract(`${repo}-master`, path);
+  await zip.extract(`${repo}-${branch}`, path);
   console.log(chalk.gray("Done"));
   await zip.close();
   fs.unlinkSync(`${__dirname}/${name}.zip`);

@@ -149,16 +149,19 @@ function handler(template, name) {
 exports.handler = handler;
 function download(repo, path, name) {
     return __awaiter(this, void 0, void 0, function () {
-        var res, fileStream, zip;
+        var branch, res, fileStream, zip;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/create-anchor-app/".concat(repo, "/zip/refs/heads/master"))];
+                case 0:
+                    branch = "master";
+                    return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/create-anchor-app/".concat(repo, "/zip/refs/heads/master"))];
                 case 1:
                     res = (_a.sent());
                     if (!(res.status !== 200)) return [3 /*break*/, 3];
                     return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/create-anchor-app/".concat(repo, "/zip/refs/heads/main"))];
                 case 2:
                     res = (_a.sent());
+                    branch = "main";
                     _a.label = 3;
                 case 3:
                     console.log(chalk_1.default.gray(res.statusText));
@@ -172,7 +175,7 @@ function download(repo, path, name) {
                     _a.sent();
                     fs_1.default.mkdirSync(path);
                     zip = new node_stream_zip_1.default.async({ file: "".concat(__dirname, "/").concat(name, ".zip") });
-                    return [4 /*yield*/, zip.extract("".concat(repo, "-master"), path)];
+                    return [4 /*yield*/, zip.extract("".concat(repo, "-").concat(branch), path)];
                 case 5:
                     _a.sent();
                     console.log(chalk_1.default.gray("Done"));
