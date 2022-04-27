@@ -5,8 +5,27 @@
 Quickly create an anchor program from templates and setup anchor dev environment. 
 <br>
 
+## Example
+<img alt="Logo" align="center" src="https://i.imgur.com/MJYG7Ku.png" width="60%" />
+
+## Installation
+```
+npm i -g @create-anchor-app/cli
+```
+
+## Usage
+```
+create-anchor-app
+```
+Use without installing
+```
+npx @create-anchor-app/cli
+```
+
 ## Feature roadmap
 - [x] Command to generate anchor contracts
 - [ ] Security.txt generation
-- [ ] local ledger directory 
+- [ ] local ledger directory
+
 - [ ] local wallet generation and directory 
+
