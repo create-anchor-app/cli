@@ -27,6 +27,7 @@ npx @create-anchor-app/cli
 
 ## Feature roadmap
 - [x] Command to generate anchor contracts
+- [ ] CI for Anchor projects
 - [ ] Security.txt generation
 - [ ] local ledger directory
 
