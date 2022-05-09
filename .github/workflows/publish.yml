@@ -44,51 +44,6 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-name: deploy to prod
-
-on:
-  push:
-    branches: [master]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use Node 16
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-
-      - name: Install vercel
-        run: npm i vercel -g
-
-      - name: Build
-        run: npm install && npm run build
-
-
-      - name: Deploy API
-        run: vercel --prod --token $VERCEL_TOKEN
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJ }}
-
-
-      - name: Version
-        uses: "phips28/gh-action-bump-version@master"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Publish
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc && npm publish --access public
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-
     publish-gpr:
       needs: deploy
       runs-on: ubuntu-latest
