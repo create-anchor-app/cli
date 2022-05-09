@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "thedarkrai07",
+      "name": "Darkrai.07",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105098416?v=4",
+      "profile": "https://github.com/thedarkrai07",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "cli",
+  "projectOwner": "create-anchor-app",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
