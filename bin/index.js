@@ -40,172 +40,72 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inquirer_1 = __importDefault(require("inquirer"));
-var fs_1 = __importDefault(require("fs"));
+var fs_1 = require("fs");
 var node_fetch_1 = __importDefault(require("node-fetch"));
 var handler_1 = require("./handler");
 var path_1 = __importDefault(require("path"));
 var chalk_1 = __importDefault(require("chalk"));
-var generate = require("project-name-generator");
+var utils_1 = require("./utils");
 var args = process.argv.slice(2);
 var supportedCommands = ["-v", "--version", "-h", "--help"];
 console.clear();
-var examples = {};
-(0, node_fetch_1.default)("https://create-anchor-app.vercel.app/api.json")
-    .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b, _c;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
+(function () { return __awaiter(void 0, void 0, void 0, function () {
+    var filePath, res, _a, _b, _c, examples, exampleName, _d, answer, _e, err_1;
+    return __generator(this, function (_f) {
+        switch (_f.label) {
             case 0:
-                _b = (_a = fs_1.default).writeFile;
-                _c = [path_1.default.resolve(__dirname, "api.json")];
-                return [4 /*yield*/, res.text()];
+                _f.trys.push([0, 9, , 10]);
+                filePath = path_1.default.resolve(__dirname, "api.json");
+                return [4 /*yield*/, (0, node_fetch_1.default)("https://create-anchor-app.vercel.app/api.json")];
             case 1:
-                _b.apply(_a, _c.concat([_d.sent(), function (err) { return __awaiter(void 0, void 0, void 0, function () {
-                        var _a, exampleName_1, name_1;
-                        return __generator(this, function (_b) {
-                            switch (_b.label) {
-                                case 0:
-                                    examples = require(path_1.default.resolve(__dirname, "api.json"));
-                                    _a = args.length;
-                                    switch (_a) {
-                                        case 0: return [3 /*break*/, 1];
-                                        case 1: return [3 /*break*/, 2];
-                                        case 2: return [3 /*break*/, 3];
-                                    }
-                                    return [3 /*break*/, 7];
-                                case 1:
-                                    inquirer_1.default
-                                        .prompt([
-                                        {
-                                            type: "list",
-                                            name: "example",
-                                            message: "What are you building today?",
-                                            choices: Object.keys(examples),
-                                        },
-                                    ])
-                                        .then(function (answer) {
-                                        exampleName_1 = answer.example;
-                                        chooseName()
-                                            .then(function (answer) { return __awaiter(void 0, void 0, void 0, function () {
-                                            return __generator(this, function (_a) {
-                                                switch (_a.label) {
-                                                    case 0: return [4 /*yield*/, (0, handler_1.handler)(exampleName_1, answer)];
-                                                    case 1:
-                                                        _a.sent();
-                                                        return [2 /*return*/];
-                                                }
-                                            });
-                                        }); })
-                                            .catch(function (err) {
-                                            console.clear();
-                                            if (err.command) {
-                                                console.log("".concat(chalk_1.default.cyan(err.command), " has failed."));
-                                            }
-                                            else {
-                                                console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
-                                                console.log(err.message);
-                                            }
-                                        });
-                                    })
-                                        .catch(function (err) {
-                                        console.clear();
-                                        console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
-                                        console.log(err.message);
-                                    });
-                                    return [3 /*break*/, 8];
-                                case 2:
-                                    if (Object.keys(examples).includes(args[0])) {
-                                        chooseName()
-                                            .then(function (answer) { return __awaiter(void 0, void 0, void 0, function () {
-                                            return __generator(this, function (_a) {
-                                                switch (_a.label) {
-                                                    case 0: return [4 /*yield*/, (0, handler_1.handler)(args[0], answer)];
-                                                    case 1:
-                                                        _a.sent();
-                                                        return [2 /*return*/];
-                                                }
-                                            });
-                                        }); })
-                                            .catch(function (err) {
-                                            console.clear();
-                                            if (err.command) {
-                                                console.log("".concat(chalk_1.default.cyan(err.command), " has failed."));
-                                            }
-                                            console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
-                                            console.log(err.message);
-                                        });
-                                    }
-                                    else {
-                                        flags(args[0]);
-                                    }
-                                    return [3 /*break*/, 8];
-                                case 3:
-                                    if (!Object.keys(examples).includes(args[0])) return [3 /*break*/, 5];
-                                    return [4 /*yield*/, (0, handler_1.handler)(args[0], args[1])];
-                                case 4:
-                                    _b.sent();
-                                    return [3 /*break*/, 6];
-                                case 5:
-                                    flags(args[0]);
-                                    _b.label = 6;
-                                case 6: return [3 /*break*/, 8];
-                                case 7:
-                                    if (args.filter(function (x) { return !supportedCommands.includes(x); }).length > 0) {
-                                        console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
-                                        process.exit(1);
-                                    }
-                                    if (args.includes("-v") || args.includes("--version")) {
-                                        flags("-v");
-                                    }
-                                    _b.label = 8;
-                                case 8: return [2 /*return*/];
-                            }
-                        });
-                    }); }]));
+                res = _f.sent();
+                _b = (_a = fs_1.promises).writeFile;
+                _c = [filePath];
+                return [4 /*yield*/, res.text()];
+            case 2: return [4 /*yield*/, _b.apply(_a, _c.concat([_f.sent()]))];
+            case 3:
+                _f.sent();
+                examples = require(filePath);
+                if (args.length) {
+                    if (args[0] === "-v" || args[0] === "--version") {
+                        (0, utils_1.flags)("-v");
+                    }
+                    if (!Object.keys(examples).includes(args[0])) {
+                        (0, utils_1.flags)(args[0]);
+                    }
+                    if (args.length > 2 && args.filter(function (x) { return !supportedCommands.includes(x); }).length > 0) {
+                        console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
+                        process.exit(1);
+                    }
+                }
+                _d = args[0];
+                if (_d) return [3 /*break*/, 5];
+                return [4 /*yield*/, (0, utils_1.whatAreYouBuilding)(examples)];
+            case 4:
+                _d = (_f.sent());
+                _f.label = 5;
+            case 5:
+                exampleName = _d;
+                _e = args[1];
+                if (_e) return [3 /*break*/, 7];
+                return [4 /*yield*/, (0, utils_1.chooseName)()];
+            case 6:
+                _e = (_f.sent());
+                _f.label = 7;
+            case 7:
+                answer = _e;
+                return [4 /*yield*/, (0, handler_1.handler)(exampleName, answer)];
+            case 8:
+                _f.sent();
+                return [3 /*break*/, 10];
+            case 9:
+                err_1 = _f.sent();
+                console.log(chalk_1.default.red("Error fetching latest examples: ".concat(err_1.message)));
+                process.exit(1);
+                return [3 /*break*/, 10];
+            case 10:
+                ;
                 return [2 /*return*/];
         }
     });
-}); })
-    .catch(function (err) {
-    console.log(chalk_1.default.red("Error fetching latest examples: ".concat(err.message)));
-    process.exit(1);
-});
-function flags(flag) {
-    switch (flag) {
-        case "-h" || "--help":
-            console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/create-anchor-app/cli#readme"), " to know more about the usage of this CLI."));
-            break;
-        case "-v" || "--version":
-            console.log("".concat(chalk_1.default.cyan("create-anchor-app"), " ").concat(chalk_1.default.green(require(path_1.default.resolve(__dirname, "../package.json")).version)));
-            break;
-        default:
-            console.log(chalk_1.default.red("Unexpected flag:", flag));
-            process.exit(1);
-    }
-}
-function chooseName() {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, inquirer_1.default
-                        .prompt([
-                        {
-                            type: "input",
-                            name: "name",
-                            message: "Name of the app?",
-                            default: generate().dashed,
-                        },
-                    ])
-                        .then(function (answer) {
-                        return answer.name;
-                    })
-                        .catch(function (err) {
-                        console.log(chalk_1.default.red("Unexpected error:", err));
-                        process.exit(1);
-                    })];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        });
-    });
-}
+}); })();
