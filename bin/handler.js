@@ -47,7 +47,7 @@ var chalk_1 = __importDefault(require("chalk"));
 var fs_1 = __importDefault(require("fs"));
 var node_fetch_1 = __importDefault(require("node-fetch"));
 var node_stream_zip_1 = __importDefault(require("node-stream-zip"));
-function handler(template, name) {
+function handler(template, name, setupCI) {
     return __awaiter(this, void 0, void 0, function () {
         var examples;
         var _this = this;
@@ -56,6 +56,7 @@ function handler(template, name) {
             examples = require(path_1.default.resolve(__dirname, "api.json"));
             console.log(chalk_1.default.gray("Template: "), chalk_1.default.green(template));
             console.log(chalk_1.default.gray("App name: "), chalk_1.default.green(name));
+            console.log(chalk_1.default.gray("Setup CI: "), chalk_1.default.green(setupCI ? 'Yes' : 'No'));
             inquirer_1.default
                 .prompt([
                 {
@@ -66,12 +67,12 @@ function handler(template, name) {
                 },
             ])
                 .then(function (answers) { return __awaiter(_this, void 0, void 0, function () {
-                var start, pathname, ex, startCommand;
+                var start, pathname, ex, startCommand, file_1, fileStream_1;
                 var _this = this;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (!answers.confirm) return [3 /*break*/, 4];
+                            if (!answers.confirm) return [3 /*break*/, 7];
                             console.clear();
                             start = new Date();
                             pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
@@ -124,11 +125,27 @@ function handler(template, name) {
                                     chalk_1.default.green("cd ".concat(name).concat(startCommand ? " && " + startCommand : "")) +
                                     "` to get started");
                             }
-                            return [3 /*break*/, 5];
+                            if (!setupCI) return [3 /*break*/, 6];
+                            (0, child_process_1.execSync)("mkdir -p ".concat(pathname, "/.github/workflows"), { stdio: [1] });
+                            console.log(chalk_1.default.gray("Setting up..."));
+                            console.log(chalk_1.default.grey('Setting up CI for the project...'));
+                            return [4 /*yield*/, (0, node_fetch_1.default)('https://gist.githubusercontent.com/anoushk1234/0f86460f08821bdbbdb03a3f56681928/raw/995c7d1a221546cadef7fa47131eef1a57001706/tests.yml')];
                         case 4:
+                            file_1 = _a.sent();
+                            fileStream_1 = fs_1.default.createWriteStream("".concat(pathname, "/.github/workflows/ci.yml"));
+                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                    file_1.body.pipe(fileStream_1);
+                                    file_1.body.on("error", reject);
+                                    fileStream_1.on("finish", resolve);
+                                })];
+                        case 5:
+                            _a.sent();
+                            _a.label = 6;
+                        case 6: return [3 /*break*/, 8];
+                        case 7:
                             console.log(chalk_1.default.red("Operation cancelled by user"));
-                            _a.label = 5;
-                        case 5: return [2 /*return*/];
+                            _a.label = 8;
+                        case 8: return [2 /*return*/];
                     }
                 });
             }); })

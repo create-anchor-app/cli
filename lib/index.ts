@@ -8,7 +8,7 @@ import { handler } from "./handler";
 import path from "path";
 import chalk from "chalk";
 
-import { chooseName, flags, whatAreYouBuilding } from "./utils";
+import { chooseName, flags, shouldSetupCI, whatAreYouBuilding } from "./utils";
 
 const args = process.argv.slice(2);
 const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
@@ -25,8 +25,8 @@ console.clear();
     const examples = require(filePath);
 
     if (args.length) {
-      if (args[0] === "-v" || args[0] === "--version") {
-        flags("-v");
+      if (supportedCommands.includes(args[0])) {
+        flags(args[0]);
       }
 
       if (!Object.keys(examples).includes(args[0])) {
@@ -38,10 +38,12 @@ console.clear();
         process.exit(1);
       }
     }
-
+    
     const exampleName = args[0] || await whatAreYouBuilding(examples);
     const answer = args[1] || await chooseName();
-    await handler(exampleName, answer);
+    const setupCI = args[2] || await shouldSetupCI();
+    
+    await handler(exampleName, answer, setupCI);
 
 
 

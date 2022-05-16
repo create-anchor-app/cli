@@ -21,7 +21,7 @@ export function flags(flag: string) {
             );
             break;
         default:
-            console.log(chalk.red("Unexpected flag:", flag));
+            console.log(chalk.red("Unexpected flag or project type:", flag));
     }
     process.exit(1);
 }
@@ -56,6 +56,25 @@ export const whatAreYouBuilding = async (examples: Object) => {
                 name: "example",
                 message: "What are you building today?",
                 choices: Object.keys(examples),
+            },
+        ]).catch((err) => {
+            console.log(chalk.red("Unexpected error:", err));
+            process.exit(1);
+        });
+
+    return answer.example
+
+};
+
+export const shouldSetupCI = async () => {
+
+    const answer = await inquirer
+        .prompt([
+            {
+                type: "confirm",
+                name: "example",
+                message: "Do you want to setup CI?",
+                default: true,
             },
         ]).catch((err) => {
             console.log(chalk.red("Unexpected error:", err));
