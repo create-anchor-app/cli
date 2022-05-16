@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.whatAreYouBuilding = exports.chooseName = exports.flags = void 0;
+exports.shouldSetupCI = exports.whatAreYouBuilding = exports.chooseName = exports.flags = void 0;
 var chalk_1 = __importDefault(require("chalk"));
 var inquirer_1 = __importDefault(require("inquirer"));
 var project_name_generator_1 = __importDefault(require("project-name-generator"));
@@ -53,7 +53,7 @@ function flags(flag) {
             console.log("".concat(chalk_1.default.cyan("create-anchor-app"), " ").concat(chalk_1.default.green(require(path_1.default.resolve(__dirname, "../package.json")).version)));
             break;
         default:
-            console.log(chalk_1.default.red("Unexpected flag:", flag));
+            console.log(chalk_1.default.red("Unexpected flag or project type:", flag));
     }
     process.exit(1);
 }
@@ -106,3 +106,26 @@ var whatAreYouBuilding = function (examples) { return __awaiter(void 0, void 0, 
     });
 }); };
 exports.whatAreYouBuilding = whatAreYouBuilding;
+var shouldSetupCI = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var answer;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, inquirer_1.default
+                    .prompt([
+                    {
+                        type: "confirm",
+                        name: "example",
+                        message: "Do you want to setup CI?",
+                        default: true,
+                    },
+                ]).catch(function (err) {
+                    console.log(chalk_1.default.red("Unexpected error:", err));
+                    process.exit(1);
+                })];
+            case 1:
+                answer = _a.sent();
+                return [2 /*return*/, answer.example];
+        }
+    });
+}); };
+exports.shouldSetupCI = shouldSetupCI;

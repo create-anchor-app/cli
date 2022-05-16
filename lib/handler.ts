@@ -6,11 +6,12 @@ import fs from "fs";
 import fetch from "node-fetch";
 import zipper from "node-stream-zip";
 
-export async function handler(template: string, name: string) {
+export async function handler(template: string, name: string, setupCI: boolean) {
   console.clear();
   const examples = require(path.resolve(__dirname, "api.json"));
   console.log(chalk.gray("Template: "), chalk.green(template));
   console.log(chalk.gray("App name: "), chalk.green(name));
+  console.log(chalk.gray("Setup CI: "), chalk.green(setupCI ? 'Yes' : 'No'));
   inquirer
     .prompt([
       {
@@ -67,11 +68,25 @@ export async function handler(template: string, name: string) {
         if (startCommand !== undefined && startCommand !== "") {
           console.log(
             "run `" +
-              chalk.green(
-                `cd ${name}${startCommand ? " && " + startCommand : ""}`
-              ) +
-              "` to get started"
+            chalk.green(
+              `cd ${name}${startCommand ? " && " + startCommand : ""}`
+            ) +
+            "` to get started"
           );
+        }
+        if (setupCI) {
+          execSync(`mkdir -p ${pathname}/.github/workflows`, { stdio: [1] });
+          console.log(chalk.gray("Setting up..."));
+          console.log(chalk.grey('Setting up CI for the project...'))
+          
+          const file = await fetch('https://gist.githubusercontent.com/anoushk1234/0f86460f08821bdbbdb03a3f56681928/raw/995c7d1a221546cadef7fa47131eef1a57001706/tests.yml');
+          const fileStream = fs.createWriteStream(`${pathname}/.github/workflows/ci.yml`);
+
+          await new Promise((resolve, reject) => {
+            file.body.pipe(fileStream);
+            file.body.on("error", reject);
+            fileStream.on("finish", resolve);
+          });
         }
       } else {
         console.log(chalk.red("Operation cancelled by user"));

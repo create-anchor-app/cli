@@ -50,25 +50,25 @@ var args = process.argv.slice(2);
 var supportedCommands = ["-v", "--version", "-h", "--help"];
 console.clear();
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var filePath, res, _a, _b, _c, examples, exampleName, _d, answer, _e, err_1;
-    return __generator(this, function (_f) {
-        switch (_f.label) {
+    var filePath, res, _a, _b, _c, examples, exampleName, _d, answer, _e, setupCI, _f, err_1;
+    return __generator(this, function (_g) {
+        switch (_g.label) {
             case 0:
-                _f.trys.push([0, 9, , 10]);
+                _g.trys.push([0, 11, , 12]);
                 filePath = path_1.default.resolve(__dirname, "api.json");
                 return [4 /*yield*/, (0, node_fetch_1.default)("https://create-anchor-app.vercel.app/api.json")];
             case 1:
-                res = _f.sent();
+                res = _g.sent();
                 _b = (_a = fs_1.promises).writeFile;
                 _c = [filePath];
                 return [4 /*yield*/, res.text()];
-            case 2: return [4 /*yield*/, _b.apply(_a, _c.concat([_f.sent()]))];
+            case 2: return [4 /*yield*/, _b.apply(_a, _c.concat([_g.sent()]))];
             case 3:
-                _f.sent();
+                _g.sent();
                 examples = require(filePath);
                 if (args.length) {
-                    if (args[0] === "-v" || args[0] === "--version") {
-                        (0, utils_1.flags)("-v");
+                    if (supportedCommands.includes(args[0])) {
+                        (0, utils_1.flags)(args[0]);
                     }
                     if (!Object.keys(examples).includes(args[0])) {
                         (0, utils_1.flags)(args[0]);
@@ -82,28 +82,36 @@ console.clear();
                 if (_d) return [3 /*break*/, 5];
                 return [4 /*yield*/, (0, utils_1.whatAreYouBuilding)(examples)];
             case 4:
-                _d = (_f.sent());
-                _f.label = 5;
+                _d = (_g.sent());
+                _g.label = 5;
             case 5:
                 exampleName = _d;
                 _e = args[1];
                 if (_e) return [3 /*break*/, 7];
                 return [4 /*yield*/, (0, utils_1.chooseName)()];
             case 6:
-                _e = (_f.sent());
-                _f.label = 7;
+                _e = (_g.sent());
+                _g.label = 7;
             case 7:
                 answer = _e;
-                return [4 /*yield*/, (0, handler_1.handler)(exampleName, answer)];
+                _f = args[2];
+                if (_f) return [3 /*break*/, 9];
+                return [4 /*yield*/, (0, utils_1.shouldSetupCI)()];
             case 8:
-                _f.sent();
-                return [3 /*break*/, 10];
+                _f = (_g.sent());
+                _g.label = 9;
             case 9:
-                err_1 = _f.sent();
+                setupCI = _f;
+                return [4 /*yield*/, (0, handler_1.handler)(exampleName, answer, setupCI)];
+            case 10:
+                _g.sent();
+                return [3 /*break*/, 12];
+            case 11:
+                err_1 = _g.sent();
                 console.log(chalk_1.default.red("Error fetching latest examples: ".concat(err_1.message)));
                 process.exit(1);
-                return [3 /*break*/, 10];
-            case 10:
+                return [3 /*break*/, 12];
+            case 12:
                 ;
                 return [2 /*return*/];
         }
